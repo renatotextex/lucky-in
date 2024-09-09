@@ -2,10 +2,10 @@ import './globals.css'
 import {Card, CardDescription, CardHeader, CardTitle, CardFooter, CardContent} from "@/components/ui/card";
 import DialogLogin from "@/components/login/login";
 
+
 export default function Home() {
 
-
-  return (
+  return (    
     <div className="flex min-h-screen bg-slate-900 items-center justify-center">
       <Card className="w-[440px] h-[400px] grid grid-rows-[min-content_1fr_min-content] p-4">
         <CardHeader className="flex items-center justify-center">

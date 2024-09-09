@@ -1,12 +1,27 @@
+'use client';
+
 import './../globals.css'
+import * as React from 'react';
 import {Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {Badge} from "@/components/ui/badge";
 import {Slides} from "@/components/carousel/carousel";
 import {Card} from "@/components/ui/card";
+import { userStore } from '@/stores/user-store';
+import { useUser } from '@/context/UserContext';
 
 
-export function Feed() {
+const Feed = () => {
+
+    const { user } = useUser();
+    
+    // Verifique o conteúdo do usuário
+    console.log('User:', user);
+
+    // Corrija a renderização
+    if (!user || !user.username) {
+        return <div>Loading...</div>; // Exiba algo enquanto os dados ainda estão carregando
+    }
+
     return (
         <div className="flex min-h-screen bg-slate-900 items-center justify-center shadow-xl">
             <div className="w-[700px] h-full grid grid-rows-[min-content_1fr_min-content] p-4">
@@ -19,8 +34,8 @@ export function Feed() {
                                     <AvatarFallback>CN</AvatarFallback>
                                 </Avatar>
                                 <div className="flex flex-col justify-start">
-                                    <p>User</p>
-                                    <p>user@user.com</p>
+                                    <p>{user.username}</p>
+                                    <p>{user.email}</p>
                                 </div>
                             </div>
                             <div className="flex">

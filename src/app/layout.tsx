@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { UserProvider } from '@/context/UserContext';
 import "./globals.css";
 
 const geistSans = localFont({
@@ -24,6 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <UserProvider>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-customBlue`}
@@ -31,5 +33,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
+    </UserProvider>
   );
 }

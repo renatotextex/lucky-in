@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { userStore } from "@/stores/user-store";
+import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 
 type FormDataLogin = {
@@ -34,18 +34,18 @@ type FormData = FormDataLogin | FormDataSignup;
 export function DialogLogin() {
     const [formType, setFormType] = React.useState<'login' | 'signup'>('login');
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+    const { setUserData } = useUser();
     const router = useRouter();
 
     const onSubmitLogin: SubmitHandler<FormDataLogin> = (data) => {
-        userStore.setData({ username: data.username });
-        console.log(data);
-        //console.log(userStore.data.username);
+        setUserData({ username: data.username });
+        console.log(data);        
         router.push('/feed');
     };
 
     const onSubmitSignup: SubmitHandler<FormDataSignup> = (data) => {
-        console.log(data);
-        //console.log(userStore.data.username);
+        setUserData({ username: data.username, email: data.email });
+        console.log(data);        
         router.push('/feed');
     };
 
